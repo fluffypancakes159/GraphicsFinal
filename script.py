@@ -2,7 +2,7 @@ import mdl
 from display import *
 from matrix import *
 from draw import *
-from os import *
+# from os import *
 
 """======== first_pass( commands ) ==========
 
@@ -117,7 +117,7 @@ def run(filename):
              [255,
               255,
               255]]'''
-    # print(commands)
+    print(commands)
     # print(get_lights(commands))
     light = get_lights(commands)
 
@@ -184,6 +184,15 @@ def run(filename):
                 add_torus(tmp,
                           args[0], args[1], args[2], args[3], args[4], step_3d)
                 matrix_mult( stack[-1], tmp )
+                draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
+                tmp = []
+                reflect = '.white'
+            elif c == 'mesh':
+                with open(command['cs'], 'r') as file:
+                    file_data = file.read().split('\n')
+                add_mesh(tmp, file_data)
+                matrix_mult( stack[-1], tmp)
+                print tmp
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
                 reflect = '.white'
