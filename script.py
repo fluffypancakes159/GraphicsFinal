@@ -84,14 +84,17 @@ def second_pass( commands, num_frames ):
 def get_lights(commands):
     
     lights = []
+    ambient = [150, 150, 150] # DEFAULT AMBIENT VALUE
     
     for command in commands:
         if command['op'] == 'light':
             location = command['args'][0:3]
             color = command['args'][3:6]
             lights.append(list([color, location]))
+        if command['op'] == 'ambient':
+            ambient = [int(x) for x in command['args']]
         
-    return lights
+    return ambient, lights
 
 def run(filename):
     """
@@ -108,18 +111,20 @@ def run(filename):
     view = [0,
             0,
             1];
+    '''
     ambient = [100,
                100,
                100]
-    '''light = [[0.5,
+    light = [[0.5,
               0.75,
               1],
              [255,
               255,
-              255]]'''
-    print(commands)
+              255]]
+    '''
+    # print(commands)
     # print(get_lights(commands))
-    light = get_lights(commands)
+    ambient, light = get_lights(commands)
 
     color = [0, 0, 0]
     symbols['.white'] = ['constants',
@@ -136,7 +141,7 @@ def run(filename):
             mkdir('anim/' + name)
             
     for i in range(num_frames):
-        print i
+        print "Frame: " + str(i)
         tmp = new_matrix()
         ident( tmp )
 
@@ -192,7 +197,7 @@ def run(filename):
                     file_data = file.read().split('\n')
                 add_mesh(tmp, file_data)
                 matrix_mult( stack[-1], tmp)
-                print tmp
+                # print tmp
                 draw_polygons(tmp, screen, zbuffer, view, ambient, light, symbols, reflect)
                 tmp = []
                 reflect = '.white'

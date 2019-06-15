@@ -328,7 +328,7 @@ def add_mesh(polygons, lines):
         # print tokens
         if tokens[0] == 'v':
             vertices.append([float(x.strip()) for x in tokens[1:]])
-    print(len(vertices))
+    # print(len(vertices))
     for line in lines:
         tokens = line.strip().split(' ')
         # print tokens

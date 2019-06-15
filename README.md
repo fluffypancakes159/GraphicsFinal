@@ -5,6 +5,6 @@
 
 ## Planned Features: 
 
-- light
+- light / ambient
 - mesh
 - anti-aliasing

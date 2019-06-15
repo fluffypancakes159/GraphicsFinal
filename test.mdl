@@ -1,3 +1,5 @@
+// duck mesh: https://free3d.com/3d-model/rubber-duck-v1--614347.html
+
 constants shiny_purple 0.3 0.8 0.2 0.3 0 0 0.3 0.8 0.2
 light a 0 255 0 -500 0 0 
 light b 255 0 0 0 300 0
