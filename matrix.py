@@ -124,3 +124,14 @@ def new_matrix(rows = 4, cols = 4):
         for r in range( rows ):
             m[c].append( 0 )
     return m
+    
+def default_matrix(): # for anti-aliasing
+    m = []
+    for c in range( 4 ):
+        m.append( [] )
+        for r in range( 4 ):
+            if c == r:
+                m[c].append( 2 )
+            else:
+                m[c].append( 0 )
+    return m

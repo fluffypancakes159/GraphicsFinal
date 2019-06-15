@@ -84,7 +84,7 @@ def second_pass( commands, num_frames ):
 def get_lights(commands):
     
     lights = []
-    ambient = [150, 150, 150] # DEFAULT AMBIENT VALUE
+    ambient = [100, 200, 100] # DEFAULT AMBIENT VALUE
     
     for command in commands:
         if command['op'] == 'light':
@@ -142,9 +142,7 @@ def run(filename):
             
     for i in range(num_frames):
         print "Frame: " + str(i)
-        tmp = new_matrix()
-        ident( tmp )
-
+        tmp = default_matrix()
         stack = [ [x[:] for x in tmp] ]
         screen = new_screen()
         zbuffer = new_zbuffer()
@@ -239,9 +237,9 @@ def run(filename):
             elif c == 'pop':
                 stack.pop()
             elif c == 'display':
-                display(screen)
+                display(alias_screen(screen))
             elif c == 'save':
-                save_extension(screen, args[0])
+                save_extension(alias_screen(screen), args[0])
                 # end operation loop
         if num_frames > 1:
             filename = 'anim/' + name + '/' + name + ('%03d'%i)
@@ -250,3 +248,14 @@ def run(filename):
         make_animation(name)
     
     # print(symbols)
+
+def alias_screen(screen): # only works with 1000 -> 500 pixels so haha
+    new_screen = [[i for i in range(500)] for j in range(500)]
+    for i in range(500):
+        for j in range(500):
+            cluster = [screen[2 * i][2 * j], screen[2 * i + 1][2 * j], screen[2 * i][2 * j + 1], screen[2 * i + 1][2 * j + 1]]
+            new_screen[i][j] = [sum(x) // 4 for x in zip(*cluster)]      
+    return new_screen
+
+# print alias_screen('la')
+    
