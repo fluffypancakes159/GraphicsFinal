@@ -84,7 +84,7 @@ def second_pass( commands, num_frames ):
 def get_lights(commands):
     
     lights = []
-    ambient = [100, 200, 100] # DEFAULT AMBIENT VALUE
+    ambient = [150, 150, 100] # DEFAULT AMBIENT VALUE
     
     for command in commands:
         if command['op'] == 'light':

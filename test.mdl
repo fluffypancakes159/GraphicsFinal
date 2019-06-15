@@ -2,8 +2,10 @@
 
 constants shiny_purple 0.3 0.8 0.2 0.3 0 0 0.3 0.8 0.2
 light a 0 255 0 100 0 0 
-light b 255 0 0 0 300 0
-light c 0 0 255 300 0 100
+// light e 0 255 0 200 100 0 
+light b 255 100 100 0 300 0
+light c 255 0 0 0 400 0
+light d 0 0 255 300 0 100
 
 push 
 move 200 100 0
