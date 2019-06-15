@@ -81,6 +81,17 @@ def second_pass( commands, num_frames ):
     
     return frames
 
+def get_lights(commands):
+    
+    lights = []
+    
+    for command in commands:
+        if command['op'] == 'light':
+            color = command['args'][0:3]
+            location = command['args'][3:6]
+            lights.append(list([color, location]))
+        
+    return lights
 
 def run(filename):
     """
@@ -100,12 +111,15 @@ def run(filename):
     ambient = [50,
                50,
                50]
-    light = [[0.5,
+    '''light = [[0.5,
               0.75,
               1],
              [255,
               255,
-              255]]
+              255]]'''
+    print(commands)
+    print(get_lights(commands))
+    light = get_lights(commands)
 
     color = [0, 0, 0]
     symbols['.white'] = ['constants',
@@ -220,3 +234,5 @@ def run(filename):
             save_extension(screen, filename)
     if num_frames > 1:
         make_animation(name)
+    
+    # print(symbols)
