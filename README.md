@@ -6,11 +6,5 @@
 ## Planned Features: 
 
 - light
-- set
-- saveknobs
+- mesh
 - anti-aliasing
-
-## If time permits:
-
-- tween
-- shading
