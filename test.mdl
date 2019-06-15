@@ -1,4 +1,10 @@
-light a 255 0 0 500 500 500
-light b 0 0 255 100 100 100
+light a 0 255 0 -500 0 0 
+light b 255 0 0 0 300 0
 
 push 
+rotate x 30
+rotate y 30
+torus 200 300 200 50 200
+
+display
+save lighttest.png

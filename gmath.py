@@ -21,25 +21,35 @@ COLOR = 1
 SPECULAR_EXP = 4
 
 #lighting functions
-def get_lighting(normal, view, ambient, light, symbols, reflect ):
+def get_lighting(normal, view, ambient, lights, symbols, reflect ):
+    
+    colors = []
 
-    n = normal[:]
-    normalize(n)
-    normalize(light[LOCATION])
-    normalize(view)
-    r = symbols[reflect][1]
+    for light in lights:
+        n = normal[:]
+        normalize(n)
+        normalize(light[LOCATION])
+        normalize(view)
+        r = symbols[reflect][1]
 
-    a = calculate_ambient(ambient, r)
-    d = calculate_diffuse(light, r, n)
-    s = calculate_specular(light, r, view, n)
+        a = calculate_ambient(ambient, r)
+        d = calculate_diffuse(light, r, n)
+        s = calculate_specular(light, r, view, n)
 
-    i = [0, 0, 0]
-    i[RED] = int(a[RED] + d[RED] + s[RED])
-    i[GREEN] = int(a[GREEN] + d[GREEN] + s[GREEN])
-    i[BLUE] = int(a[BLUE] + d[BLUE] + s[BLUE])
-    limit_color(i)
+        i = [0, 0, 0]
+        i[RED] = int(a[RED] + d[RED] + s[RED])
+        i[GREEN] = int(a[GREEN] + d[GREEN] + s[GREEN])
+        i[BLUE] = int(a[BLUE] + d[BLUE] + s[BLUE])
+        limit_color(i)
+        colors.append(i)
+    
+    # print(colors)
+    # print(zip(*colors))
 
-    return i
+    end_color = [(sum(x) // len(lights)) for x in zip(*colors)]
+    # print(end_color)
+    
+    return end_color
 
 def calculate_ambient(alight, reflect):
     a = [0, 0, 0]
@@ -81,6 +91,9 @@ def limit_color(color):
     color[RED] = 255 if color[RED] > 255 else color[RED]
     color[GREEN] = 255 if color[GREEN] > 255 else color[GREEN]
     color[BLUE] = 255 if color[BLUE] > 255 else color[BLUE]
+    color[RED] = 0 if color[RED] < 0 else color[RED]
+    color[GREEN] = 0 if color[GREEN] < 0 else color[GREEN]
+    color[BLUE] = 0 if color[BLUE] < 0 else color[BLUE]
 
 #vector functions
 #normalize vetor, should modify the parameter

@@ -87,8 +87,8 @@ def get_lights(commands):
     
     for command in commands:
         if command['op'] == 'light':
-            color = command['args'][0:3]
-            location = command['args'][3:6]
+            location = command['args'][0:3]
+            color = command['args'][3:6]
             lights.append(list([color, location]))
         
     return lights
@@ -108,17 +108,17 @@ def run(filename):
     view = [0,
             0,
             1];
-    ambient = [50,
-               50,
-               50]
+    ambient = [100,
+               100,
+               100]
     '''light = [[0.5,
               0.75,
               1],
              [255,
               255,
               255]]'''
-    print(commands)
-    print(get_lights(commands))
+    # print(commands)
+    # print(get_lights(commands))
     light = get_lights(commands)
 
     color = [0, 0, 0]
@@ -144,7 +144,7 @@ def run(filename):
         screen = new_screen()
         zbuffer = new_zbuffer()
         tmp = []
-        step_3d = 10
+        step_3d = 20
         consts = ''
         coords = []
         coords1 = []
